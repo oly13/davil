@@ -28,7 +28,7 @@ FLASK_PORT = '5000'
 DEFAULT_ACCESS_ADDRESS = LOCALHOST
 BOKEH_DEFAULT_LISTENING_ADDRESS = LOCALHOST
 FLASK_DEFAULT_ADDRESS = LOCALHOST
-BOKEH_APP_PATH='/datavisualization'
+BOKEH_APP_PATH = '/datavisualization'
 
 # Default to Docker Settings
 bokeh_access_address = flask_access_address = getenv('DOCKER_IP')
@@ -50,13 +50,16 @@ def get_files():
     return [f for f in listdir(UPLOAD_FOLDER) if path.isfile(path.join(UPLOAD_FOLDER, f))
             and has_valid_extension(f)]
 
+
 def modify_doc(doc):
     filename = get_files()[0]
     if filename:
         GeneralModel.star_coordinates_init("SC", filename, doc=doc)
 
+
 bokeh_app = Application(FunctionHandler(modify_doc))
 io_loop = IOLoop.current()
+
 
 def init_bokeh_server():
     try:
@@ -65,8 +68,9 @@ def init_bokeh_server():
     except:
         pass  # Server already started
 
+
 # Might need if we upgrade to 0.12.4
-#server.start()
+# server.start()
 
 @app.route('/')
 def bokeh_server():
@@ -88,10 +92,12 @@ def upload_file():
 
     return redirect('/')
 
+
 if __name__ == '__main__':
     from tornado.httpserver import HTTPServer
     from tornado.wsgi import WSGIContainer
     from bokeh.util.browser import view
+
     # Serve the Flask app
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(FLASK_PORT, address=flask_listening_address)

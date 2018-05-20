@@ -1,5 +1,6 @@
 import logging
 
+
 class Logger(object):
     """Single logger used across the application"""
     # Logging level across the whole application

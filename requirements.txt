@@ -59,7 +59,7 @@ requests==2.13.0
 runipy==0.1.5
 scandir==1.4
 scikit-learn==0.18.1
-scipy==0.19.0
+scipy==1.1.0
 simplegeneric==0.8.1
 singledispatch==3.4.0.3
 six==1.10.0

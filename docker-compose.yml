@@ -3,8 +3,8 @@ services:
   web:
     # replace username/repo:tag with your name and image details
     image: niloxx/davil:0.1
-    environment:
-      - DOCKER_IP
+#    environment:
+#      - DOCKER_IP
     deploy:
       replicas: 2
       resources:

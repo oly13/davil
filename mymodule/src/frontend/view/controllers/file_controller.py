@@ -8,17 +8,19 @@ from os import path, listdir
 class FileController(object):
     """Controller for selecting the input file"""
     LOGGER = logging.getLogger(__name__)
-    DEFAULT_DIRECTORY = path.abspath(path.relpath(path.join('mymodule', 'src', 'server', 'resources')))
+    DEFAULT_DIRECTORY = path.abspath(path.relpath(path.join('resources')))
     AVAILABLE_EXTENSIONS = ["CSV"]
 
     @staticmethod
     def _list_files(directory=DEFAULT_DIRECTORY):
         """Returns: (String[]) available files on the given directory"""
+
         def has_valid_extension(filename):
             """file: (String | File) filename
                Returns True if the file has an extension of AVAILABLE_EXTENSIONS
             """
             return filename.split('.')[-1].upper() in FileController.AVAILABLE_EXTENSIONS
+
         if not path.isdir(directory):
             raise ValueError("ERROR: '%s' is not a valid directory", directory)
         return [f for f in listdir(directory) if path.isfile(path.join(directory, f))
